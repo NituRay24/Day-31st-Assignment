@@ -1,0 +1,141 @@
+Enter password: **************
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 11
+Server version: 8.0.29 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> CREATE DATABASE Employeepayroll2;
+Query OK, 1 row affected (0.94 sec)
+
+mysql> USE Employeepayroll2
+Database changed
+mysql> CREATE TABLE Employeepayroll;
+ERROR 4028 (HY000): A table must have at least one visible column.
+mysql> CREATE TABLE Employeepayroll(first_name VARCHAR(50) NOT NULL,last_name VARCHAR(50),address VARCHAR(140) NOT NULL,city VARCHAR(25),state VARCHAR(35),zip int(10) NOT NULL,phone_num int(15),email VARCHAR(25));
+Query OK, 0 rows affected, 2 warnings (1.92 sec)
+
+mysql> Query OK, 0 rows affected, 2 warnings (0.02 sec)
+    -> DESC Employeepayroll;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Query OK, 0 rows affected, 2 warnings (0.02 sec)
+DESC Employeepayroll' at line 1
+mysql> DESC Employeepayroll;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| first_name | varchar(50)  | NO   |     | NULL    |       |
+| last_name  | varchar(50)  | YES  |     | NULL    |       |
+| address    | varchar(140) | NO   |     | NULL    |       |
+| city       | varchar(25)  | YES  |     | NULL    |       |
+| state      | varchar(35)  | YES  |     | NULL    |       |
+| zip        | int          | NO   |     | NULL    |       |
+| phone_num  | int          | YES  |     | NULL    |       |
+| email      | varchar(25)  | YES  |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+8 rows in set (0.19 sec)
+
+mysql> ALTER TABLE Employeepayroll ADD emp_id int(15) NOT NULL;
+Query OK, 0 rows affected, 1 warning (0.61 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> DESC Employeepayroll;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| first_name | varchar(50)  | NO   |     | NULL    |       |
+| last_name  | varchar(50)  | YES  |     | NULL    |       |
+| address    | varchar(140) | NO   |     | NULL    |       |
+| city       | varchar(25)  | YES  |     | NULL    |       |
+| state      | varchar(35)  | YES  |     | NULL    |       |
+| zip        | int          | NO   |     | NULL    |       |
+| phone_num  | int          | YES  |     | NULL    |       |
+| email      | varchar(25)  | YES  |     | NULL    |       |
+| emp_id     | int          | NO   |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+9 rows in set (0.09 sec)
+
+mysql> INSERT INTO Employeepayroll(first_name VARCHAR(50) NOT NULL,last_name VARCHAR(50),address VARCHAR(140) NOT NULL,city VARCHAR(25),state VARCHAR(35),zip int(10) NOT NULL,phone_num int(15),email VARCHAR(25),emp_id int(15));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'VARCHAR(50) NOT NULL,last_name VARCHAR(50),address VARCHAR(140) NOT NULL,city VA' at line 1
+mysql> INSERT INTO Employeepayroll(first_name VARCHAR(50) NOT NULL,last_name VARCHAR(50),address VARCHAR(140) NOT NULL,city VARCHAR(25),state VARCHAR(35),zip int(10) NOT NULL,phone_num int(15),email VARCHAR(25),emp_id int(15)) VALUES('Ram','Sharma','Kondapur','Hyderabad','T.S',500084,9838327920,'sharma_ram09@gmail.com',01));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'VARCHAR(50) NOT NULL,last_name VARCHAR(50),address VARCHAR(140) NOT NULL,city VA' at line 1
+mysql> INSERT INTO Employeepayroll(first_name VARCHAR(50) NOT NULL,last_name VARCHAR(50),address VARCHAR(140) NOT NULL,city VARCHAR(25),state VARCHAR(35),zip int(10) NOT NULL,phone_num int(15),email VARCHAR(25),emp_id int(15)) VALUES('Ram','Sharma','Kondapur','Hyderabad','T.S',500084,9838327920,'sharma_ram09@gmail.com',01);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'VARCHAR(50) NOT NULL,last_name VARCHAR(50),address VARCHAR(140) NOT NULL,city VA' at line 1
+mysql> INSERT INTO Employeepayroll(first_name VARCHAR(50) NOT NULL,last_name VARCHAR(50),address VARCHAR(140) NOT NULL,city VARCHAR(25),state VARCHAR(35),zip int(10) NOT NULL,phone_num int(15),email VARCHAR(25),emp_id int(15)) VALUES('Ram','Sharma','Kondapur','Hyderabad','TS',500084,988995983,'sharma_ram@gmail.com',01);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'VARCHAR(50) NOT NULL,last_name VARCHAR(50),address VARCHAR(140) NOT NULL,city VA' at line 1
+mysql> INSERT INTO Employeepayroll(first_name,last_name,address,city,state,zip,phone_num,email,emp_id) VALUES('ram','sharma','Kondapur','Hyderabad','TS',500084,8690945058,'sharma_ram998@gmail.com',01);
+ERROR 1264 (22003): Out of range value for column 'phone_num' at row 1
+mysql> INSERT INTO Employeepayroll(first_name,last_name,address,city,state,zip,phone_num,email,emp_id) VALUES('ram','sharma','Kondapur','Hyderabad','TS',500084,86909450,'sharma_ram355@gmail.com',01);
+Query OK, 1 row affected (0.15 sec)
+
+mysql> SELECT * FROM Employeepayroll;
++------------+-----------+----------+-----------+-------+--------+-----------+-------------------------+--------+
+| first_name | last_name | address  | city      | state | zip    | phone_num | email                   | emp_id |
++------------+-----------+----------+-----------+-------+--------+-----------+-------------------------+--------+
+| ram        | sharma    | Kondapur | Hyderabad | TS    | 500084 |  86909450 | sharma_ram355@gmail.com |      1 |
++------------+-----------+----------+-----------+-------+--------+-----------+-------------------------+--------+
+1 row in set (0.00 sec)
+
+mysql> INSERT INTO Employeepayroll(first_name,last_name,address,city,state,zip,phone_num,email,emp_id) VALUES('Shiya','khandelwal','Alwar','Jaipur','Rajasthan',301019,898309389,'khan_shiya@gmail.com',01);
+Query OK, 1 row affected (0.13 sec)
+
+mysql> INSERT INTO Employeepayroll(first_name,last_name,address,city,state,zip,phone_num,email,emp_id) VALUES('aruna','gandhi','chhatarpur','delhi',UP,109198,79384908,'gandhi_arudu@gmail.com',03);
+ERROR 1054 (42S22): Unknown column 'UP' in 'field list'
+mysql> INSERT INTO Employeepayroll(first_name,last_name,address,city,state,zip,phone_num,email,emp_id) VALUES('aruna','gandhi','chhatarpur','delhi','UP',109198,79384908,'gandhi_arudu@gmail.com',03);
+Query OK, 1 row affected (0.13 sec)
+
+mysql> SELECT * FROM Employeepayroll;
++------------+------------+------------+-----------+-----------+--------+-----------+-------------------------+--------+
+| first_name | last_name  | address    | city      | state     | zip    | phone_num | email                   | emp_id |
++------------+------------+------------+-----------+-----------+--------+-----------+-------------------------+--------+
+| ram        | sharma     | Kondapur   | Hyderabad | TS        | 500084 |  86909450 | sharma_ram355@gmail.com |      1 |
+| Shiya      | khandelwal | Alwar      | Jaipur    | Rajasthan | 301019 | 898309389 | khan_shiya@gmail.com    |      1 |
+| aruna      | gandhi     | chhatarpur | delhi     | UP        | 109198 |  79384908 | gandhi_arudu@gmail.com  |      3 |
++------------+------------+------------+-----------+-----------+--------+-----------+-------------------------+--------+
+3 rows in set (0.00 sec)
+
+mysql> UPDATE Employeepayroll set emp_id=02 WHERE first_name='Shiya';
+Query OK, 1 row affected (0.09 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM Employeepayroll;
++------------+------------+------------+-----------+-----------+--------+-----------+-------------------------+--------+
+| first_name | last_name  | address    | city      | state     | zip    | phone_num | email                   | emp_id |
++------------+------------+------------+-----------+-----------+--------+-----------+-------------------------+--------+
+| ram        | sharma     | Kondapur   | Hyderabad | TS        | 500084 |  86909450 | sharma_ram355@gmail.com |      1 |
+| Shiya      | khandelwal | Alwar      | Jaipur    | Rajasthan | 301019 | 898309389 | khan_shiya@gmail.com    |      2 |
+| aruna      | gandhi     | chhatarpur | delhi     | UP        | 109198 |  79384908 | gandhi_arudu@gmail.com  |      3 |
++------------+------------+------------+-----------+-----------+--------+-----------+-------------------------+--------+
+3 rows in set (0.00 sec)
+
+mysql> INSERT INTO Employeepayroll(first_name,last_name,address,city,state,zip,phone_num,email,emp_id) VALUES('ahmed','khan','saran','patna',843688,6573879,'khanahmed@gmail.com'04);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '04)' at line 1
+mysql> INSERT INTO Employeepayroll(first_name,last_name,address,city,state,zip,phone_num,email,emp_id) VALUES('ahmed','khan','saran','patna',843688,6573879,'khanahmed@gmail.com,04);
+    '> INSERT INTO Employeepayroll(first_name,last_name,address,city,state,zip,phone_num,email,emp_id) VALUES('ahmed','khan','saran','patna',843688,6573879,'khanahmed@gmail.com,04);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ahmed','khan','saran','patna',843688,6573879,'khanahmed@gmail.com,04)' at line 2
+mysql> INSERT INTO Employeepayroll(first_name,last_name,address,city,state,zip,phone_num,email,emp_id) VALUES('ahmed','khan','saran','patna',843688,6573879,'khanahmed@gmail.com',04);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> INSERT INTO Employeepayroll(first_name,last_name,address,city,state,zip,phone_num,email,emp_id) VALUES('samir','gupta','alwin','bangluru','karnataka',645594,87644676,'samirgupta@gmail.com',04);
+Query OK, 1 row affected (0.15 sec)
+
+mysql> DELETE FROM Empoyeepayroll WHERE first_name='aruna' and last_name='gandhi';
+ERROR 1146 (42S02): Table 'employeepayroll2.empoyeepayroll' doesn't exist
+mysql> DELETE FROM Employeepayroll WHERE first_name='aruna' and last_name='gandhi';
+Query OK, 1 row affected (0.12 sec)
+
+mysql> SELECT * FROM Employeepayroll;
++------------+------------+----------+-----------+-----------+--------+-----------+-------------------------+--------+
+| first_name | last_name  | address  | city      | state     | zip    | phone_num | email                   | emp_id |
++------------+------------+----------+-----------+-----------+--------+-----------+-------------------------+--------+
+| ram        | sharma     | Kondapur | Hyderabad | TS        | 500084 |  86909450 | sharma_ram355@gmail.com |      1 |
+| Shiya      | khandelwal | Alwar    | Jaipur    | Rajasthan | 301019 | 898309389 | khan_shiya@gmail.com    |      2 |
+| samir      | gupta      | alwin    | bangluru  | karnataka | 645594 |  87644676 | samirgupta@gmail.com    |      4 |
++------------+------------+----------+-----------+-----------+--------+-----------+-------------------------+--------+
+3 rows in set (0.00 sec)
+
+mysql> INSERT INTO Employeepayroll(first_name,last_name,address,city,state,zip,phone_num,email,emp_id) VALUES('samir','gupta','alwin','bangluru','karnataka',645594,87644676,'samirgupta@gmail.com',04);
